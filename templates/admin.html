@@ -1,0 +1,361 @@
+
+<!doctype html>
+<html lang="mn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Админ самбар | Мэргэжлүүд</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+<header class="border-b border-blue-900 bg-slate-900">
+    <div class="max-w-7xl mx-auto p-4 flex flex-wrap items-center justify-between gap-3">
+        <div>
+            <a href="/" class="text-blue-300 text-sm">← Сайт руу буцах</a>
+            <div class="flex items-center gap-3 mt-1">
+                <img src="/static/images/logo.png.png" alt="Коллежийн лого" class="w-12 h-12 rounded-full object-cover border border-amber-400/80">
+                <h1 class="text-2xl font-extrabold">Админ самбар</h1>
+            </div>
+            <p class="text-sm text-slate-400">SQLite өгөгдлийн сан · Мэргэжил, мэдээ, бүртгэл</p>
+        </div>
+
+        <form method="post" action="{{ url_for('admin_logout') }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button class="rounded-lg border border-slate-600 px-4 py-2 hover:bg-slate-800">
+                Гарах
+            </button>
+        </form>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto p-4 md:p-6">
+
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="mb-4 rounded-lg p-3 text-sm {{ 'bg-red-950 text-red-200' if category == 'error' else 'bg-emerald-950 text-emerald-200' }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <!-- МЭРГЭЖИЛ НЭМЭХ / ЗАСАХ -->
+    <div class="grid lg:grid-cols-[360px_1fr] gap-6">
+
+        <section class="rounded-2xl border border-slate-800 bg-slate-900 p-5 h-fit">
+            <h2 class="font-bold text-lg">
+                {{ 'Мэргэжил засах' if edit_program else 'Шинэ мэргэжил нэмэх' }}
+            </h2>
+
+            <form
+                method="post"
+                action="{{ url_for('admin_edit', program_id=edit_program.id) if edit_program else url_for('admin_add') }}"
+                class="space-y-4 mt-4"
+            >
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+
+                <label class="block text-sm">
+                    Мэргэжлийн нэр
+                    <input
+                        name="name"
+                        required
+                        maxlength="180"
+                        value="{{ edit_program.name if edit_program else '' }}"
+                        class="mt-1 w-full rounded-lg bg-slate-800 border border-slate-700 p-3"
+                    >
+                </label>
+
+                <label class="block text-sm">
+                    Slug
+                    <span class="text-slate-500">(латин үсэг, тоо, зураас)</span>
+                    <input
+                        name="slug"
+                        required
+                        pattern="[a-z0-9-]+"
+                        value="{{ edit_program.slug if edit_program else '' }}"
+                        placeholder="web-design"
+                        class="mt-1 w-full rounded-lg bg-slate-800 border border-slate-700 p-3"
+                    >
+                </label>
+
+                <label class="block text-sm">
+                    Эрэмбэ
+                    <input
+                        type="number"
+                        name="sort_order"
+                        value="{{ edit_program.sort_order if edit_program else programs|length }}"
+                        class="mt-1 w-full rounded-lg bg-slate-800 border border-slate-700 p-3"
+                    >
+                </label>
+
+                {% if edit_program %}
+                <label class="flex gap-2 items-center text-sm">
+                    <input
+                        type="checkbox"
+                        name="active"
+                        value="1"
+                        {% if edit_program.active %}checked{% endif %}
+                    >
+                    Сайт дээр идэвхтэй харуулах
+                </label>
+                {% endif %}
+
+                <button class="w-full rounded-lg bg-blue-600 hover:bg-blue-500 p-3 font-bold">
+                    {{ 'Өөрчлөлт хадгалах' if edit_program else 'Мэргэжил нэмэх' }}
+                </button>
+
+                {% if edit_program %}
+                <a
+                    href="{{ url_for('admin_dashboard') }}"
+                    class="block text-center text-sm text-slate-400 hover:text-white"
+                >
+                    Болих
+                </a>
+                {% endif %}
+            </form>
+
+            <p class="text-xs leading-5 text-amber-200/80 mt-5">
+                Анхаар: шинэ мэргэжлийг бүртгэлийн сонголтод нэмнэ.
+                Дэлгэрэнгүй хуудасны тайлбар, зураг, давуу тал зэргийг
+                program-details.html дотор тусад нь нэмэх шаардлагатай.
+            </p>
+        </section>
+
+        <!-- МЭРГЭЖЛИЙН ЖАГСААЛТ -->
+        <section class="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex justify-between gap-3">
+                <h2 class="font-bold text-lg">Мэргэжлийн жагсаалт</h2>
+                <span class="text-sm text-slate-400">
+                    Нийт: {{ programs|length }}
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-slate-800 text-slate-300">
+                        <tr>
+                            <th class="p-3">Эрэмбэ</th>
+                            <th class="p-3">Нэр</th>
+                            <th class="p-3">Slug</th>
+                            <th class="p-3">Төлөв</th>
+                            <th class="p-3">Үйлдэл</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for p in programs %}
+                        <tr class="border-t border-slate-800">
+                            <td class="p-3">{{ p.sort_order }}</td>
+                            <td class="p-3 font-medium min-w-48">{{ p.name }}</td>
+                            <td class="p-3 text-slate-400">{{ p.slug }}</td>
+
+                            <td class="p-3">
+                                {% if p.active %}
+                                <span class="text-emerald-300">Идэвхтэй</span>
+                                {% else %}
+                                <span class="text-slate-500">Нуугдсан</span>
+                                {% endif %}
+                            </td>
+
+                            <td class="p-3">
+                                <div class="flex gap-2">
+                                    <a
+                                        class="rounded-md border border-blue-700 px-3 py-1.5 text-blue-200 hover:bg-blue-950"
+                                        href="{{ url_for('admin_edit', program_id=p.id) }}"
+                                    >
+                                        Засах
+                                    </a>
+
+                                    <form
+                                        method="post"
+                                        action="{{ url_for('admin_delete', program_id=p.id) }}"
+                                        onsubmit="return confirm('Энэ мэргэжлийг устгах уу?')"
+                                    >
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                                        <button class="rounded-md border border-red-900 px-3 py-1.5 text-red-200 hover:bg-red-950">
+                                            Устгах
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="p-6 text-center text-slate-400">
+                                Одоогоор мэргэжил алга.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- МЭДЭЭ НЭМЭХ -->
+    <section class="mt-6 grid lg:grid-cols-[360px_1fr] gap-6">
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-5 h-fit">
+            <h2 class="font-bold text-lg">Мэдээ нэмэх</h2>
+            <p class="text-sm text-slate-400 mt-1">Энд бичсэн мэдээ сайт дээрх Мэдээ хэсэгт гарна.</p>
+
+            <form method="post" enctype="multipart/form-data" action="{{ url_for('admin_news_add') }}" class="space-y-4 mt-4">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+
+                <label class="block text-sm">
+                    Гарчиг
+                    <input
+                        name="title"
+                        required
+                        maxlength="180"
+                        class="mt-1 w-full rounded-lg bg-slate-800 border border-slate-700 p-3"
+                    >
+                </label>
+
+                <label class="block text-sm">
+                    Мэдээний зураг (заавал биш)
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        class="mt-1 block w-full text-sm text-slate-300 file:mr-3 file:rounded-lg file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-white"
+                    >
+                    <span class="block text-xs text-slate-500 mt-1">PNG, JPG, WEBP эсвэл GIF</span>
+                </label>
+
+                <label class="block text-sm">
+                    Агуулга
+                    <textarea
+                        name="body"
+                        required
+                        maxlength="4000"
+                        rows="6"
+                        class="mt-1 w-full rounded-lg bg-slate-800 border border-slate-700 p-3"
+                    ></textarea>
+                </label>
+
+                <label class="flex gap-2 items-center text-sm">
+                    <input type="checkbox" name="published" value="1" checked>
+                    Сайт дээр харуулах
+                </label>
+
+                <button class="w-full rounded-lg bg-blue-600 hover:bg-blue-500 p-3 font-bold">
+                    Мэдээ нийтлэх
+                </button>
+            </form>
+        </div>
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex justify-between gap-3">
+                <h2 class="font-bold text-lg">Нийтлэгдсэн мэдээ</h2>
+                <span class="text-sm text-slate-400">Нийт: {{ news|default([])|length }}</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-slate-800 text-slate-300">
+                        <tr>
+                            <th class="p-3">Огноо</th>
+                            <th class="p-3">Гарчиг</th>
+                            <th class="p-3">Төлөв</th>
+                            <th class="p-3">Үйлдэл</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in news|default([]) %}
+                        <tr class="border-t border-slate-800 align-top">
+                            <td class="p-3 text-slate-400 whitespace-nowrap">{{ item.created_at }}</td>
+                            <td class="p-3">
+                                {% if item.image_path %}
+                                <img src="{{ item.image_path }}" alt="Мэдээний зураг" class="mb-2 h-20 w-32 rounded-lg object-cover border border-slate-700">
+                                {% endif %}
+                                <div class="font-medium">{{ item.title }}</div>
+                                <p class="text-slate-400 text-xs mt-1 leading-5 max-w-xl">{{ item.body[:160] }}{% if item.body|length > 160 %}...{% endif %}</p>
+                            </td>
+                            <td class="p-3">
+                                {% if item.published %}
+                                <span class="text-emerald-300">Идэвхтэй</span>
+                                {% else %}
+                                <span class="text-slate-500">Нуугдсан</span>
+                                {% endif %}
+                            </td>
+                            <td class="p-3">
+                                <form
+                                    method="post"
+                                    action="{{ url_for('admin_news_delete', news_id=item.id) }}"
+                                    onsubmit="return confirm('Энэ мэдээг устгах уу?')"
+                                >
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                                    <button class="rounded-md border border-red-900 px-3 py-1.5 text-red-200 hover:bg-red-950">
+                                        Устгах
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="p-6 text-center text-slate-400">Одоогоор мэдээ алга.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- УРЬДЧИЛСАН БҮРТГЭЛ -->
+    <section class="mt-6 rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
+
+        <div class="p-5 border-b border-slate-800 flex flex-wrap justify-between gap-3">
+            <div>
+                <h2 class="font-bold text-lg">Урьдчилсан бүртгэлүүд</h2>
+                <p class="text-sm text-slate-400 mt-1">
+                    Вэбсайтаар бүртгүүлсэн суралцагчдын мэдээлэл
+                </p>
+            </div>
+
+            <span class="text-sm text-blue-300">
+                Нийт: {{ registrations|default([])|length }}
+            </span>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-slate-800 text-slate-300">
+                    <tr>
+                        <th class="p-3">№</th>
+                        <th class="p-3">Овог, нэр</th>
+                        <th class="p-3">Утас</th>
+                        <th class="p-3">Сонгосон мэргэжил</th>
+                        <th class="p-3">Бүртгүүлсэн огноо</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for r in registrations|default([]) %}
+                    <tr class="border-t border-slate-800 hover:bg-slate-800/50">
+                        <td class="p-3">{{ loop.index }}</td>
+                        <td class="p-3 font-medium">{{ r['full_name'] }}</td>
+                        <td class="p-3">{{ r['phone'] }}</td>
+                        <td class="p-3">
+                            <span class="inline-block rounded-full bg-blue-950 text-blue-200 px-3 py-1">
+                                {{ r['program_name'] }}
+                            </span>
+                        </td>
+                        <td class="p-3 text-slate-400">{{ r['created_at'] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="p-8 text-center text-slate-400">
+                            Одоогоор бүртгэл алга байна.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+</main>
+</body>
+</html>

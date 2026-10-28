@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="mn" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#081a2d">
+  <meta name="description" content="Их Засаг Чингис Соосэ Политехник Коллежийн мэргэжил, элсэлт, сургалтын мэдээлэлтэй танилцана уу.">
+  <title>Их Засаг Чингис Соосэ Политехник Коллеж | Мэргэжилтэй ирээдүй</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root { color-scheme: dark; scroll-padding-top: 92px; }
+    html { scroll-behavior: smooth; }
+    ::selection { background:#2563eb; color:#fff; }
+    a, button, select { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible, select:focus-visible { outline:2px solid #93c5fd; outline-offset:4px; }
+    body { overflow-x:hidden; }
+    .section-kicker { display:inline-flex; align-items:center; gap:.55rem; }
+    .section-kicker::before { content:""; display:inline-block; width:24px; height:2px; border-radius:999px; background:#60a5fa; }
+    .soft-glow { box-shadow:0 20px 70px rgba(37,99,235,.12); }
+    .course-select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2393c5fd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:3rem; }
+    .reveal { opacity:0; transform:translateY(16px); transition:opacity .65s ease, transform .65s ease; }
+    .reveal.is-visible { opacity:1; transform:translateY(0); }
+
+    #desktopProgramsDropdown a { white-space:normal; }
+    #desktopProgramsDropdown.is-open { display:block; }
+    #desktopProgramsNav:focus-within #desktopProgramsDropdown { display:block; }
+    @media (hover:none) { #desktopProgramsNav:hover #desktopProgramsDropdown:not(.is-open) { display:none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } .reveal { opacity:1; transform:none; } }
+    body { font-family: Inter, sans-serif; background:#081a2d; color:#f8fafc; }
+    .hero-bg { background:radial-gradient(circle at 80% 20%,#174777 0,transparent 32%),linear-gradient(135deg,#071526,#0d2947 70%,#102f50); }
+    .card-bg { background:linear-gradient(180deg,#122e4d,#0b2037); }
+    .blue-btn { background:linear-gradient(90deg,#0756c9,#4778ff); transition:.2s ease; }
+    .blue-btn:hover { transform:translateY(-2px); filter:brightness(1.1); }
+    .glass { background:rgba(8,26,45,.88); backdrop-filter:blur(14px); }
+    .course-img { transition:transform .45s ease; }
+    .course-card:hover .course-img { transform:scale(1.06); }
+    .card-bg { box-shadow:0 12px 32px rgba(0,0,0,.12); transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+    .card-bg:hover { border-color:rgba(96,165,250,.42); }
+    .hero-bg { position:relative; isolation:isolate; }
+    .hero-bg::after { content:""; position:absolute; width: min(55vw, 720px); height:min(55vw,720px); right:-12%; top:-22%; border-radius:50%; pointer-events:none; z-index:-1; background:conic-gradient(from 0deg, rgba(37,99,235,.05), rgba(96,165,250,.26), rgba(212,175,55,.12), rgba(37,99,235,.05)); filter:blur(20px); animation: orbit-glow 24s linear infinite; }
+    body { background-image: radial-gradient(ellipse at 12% 18%, rgba(37,99,235,.12), transparent 34%), radial-gradient(ellipse at 90% 68%, rgba(14,116,144,.10), transparent 30%); background-attachment:fixed; }
+    @keyframes orbit-glow { from { transform:rotate(0deg) scale(.92); } 50% { transform:rotate(180deg) scale(1.08); } to { transform:rotate(360deg) scale(.92); } }
+    .hero-bg::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.18; background-image:radial-gradient(rgba(147,197,253,.65) .7px, transparent .7px); background-size:22px 22px; mask-image:linear-gradient(to bottom,black,transparent 85%); }
+    .blue-btn { box-shadow:0 10px 24px rgba(37,99,235,.18); }
+    .blue-btn:focus-visible { outline:2px solid #bfdbfe; outline-offset:4px; }
+    .focus-ring:focus { outline:2px solid #60a5fa; outline-offset:3px; }
+  </style>
+  <style>
+  .college-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    animation: logo-tilt 6s ease-in-out infinite;
+    box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 0 2px rgba(212,175,55,.55);
+  }
+  .scene-3d {
+    perspective: 1100px;
+    transform-style: preserve-3d;
+  }
+  .float-3d {
+    transform-style: preserve-3d;
+    animation: float-3d 7s ease-in-out infinite;
+  }
+  .cube {
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    transform-style: preserve-3d;
+    animation: cube-turn 14s linear infinite;
+  }
+  .cube span {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(147,197,253,.45);
+    background: linear-gradient(135deg, rgba(37,99,235,.28), rgba(8,26,45,.55));
+    backdrop-filter: blur(6px);
+  }
+  .cube span:nth-child(1) { transform: rotateY(0deg) translateZ(27px); }
+  .cube span:nth-child(2) { transform: rotateY(90deg) translateZ(27px); }
+  .cube span:nth-child(3) { transform: rotateY(180deg) translateZ(27px); }
+  .cube span:nth-child(4) { transform: rotateY(-90deg) translateZ(27px); }
+  .cube span:nth-child(5) { transform: rotateX(90deg) translateZ(27px); }
+  .cube span:nth-child(6) { transform: rotateX(-90deg) translateZ(27px); }
+  .hero-photo-3d {
+    transform: rotateY(-12deg) rotateX(6deg);
+    transform-style: preserve-3d;
+    transition: transform .5s ease;
+    box-shadow: 28px 28px 50px rgba(0,0,0,.35);
+  }
+  .hero-photo-3d:hover { transform: rotateY(0deg) rotateX(0deg) scale(1.02); }
+  .tilt-card { transform-style: preserve-3d; transition: transform .35s ease, box-shadow .35s ease; }
+  .tilt-card:hover { transform: translateY(-8px) rotateX(6deg) rotateY(-6deg); box-shadow: 0 24px 40px rgba(0,0,0,.28); }
+  @keyframes logo-tilt {
+    0%, 100% { transform: rotateY(-18deg) rotateX(4deg); }
+    50% { transform: rotateY(18deg) rotateX(-4deg); }
+  }
+  @keyframes float-3d {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-14px) rotateX(8deg); }
+  }
+  @keyframes cube-turn {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .college-logo, .float-3d, .cube, .hero-bg::after { animation: none; }
+    .hero-photo-3d, .tilt-card { transform: none; }
+  }
+</style>
+</head>
+<body class="min-h-screen">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-3 focus:font-bold">Үндсэн агуулга руу алгасах</a>
+  <header class="sticky top-0 z-50 glass border-b border-blue-900/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-20 flex items-center justify-between gap-4">
+      <a href="#home" class="flex items-center gap-3 min-w-0" aria-label="Нүүр хуудас">
+        <img src="static/images/logo.png.png" alt="Их Засаг Чингис Соосэ Политехник Коллежийн лого" class="college-logo w-12 h-12 sm:w-[58px] sm:h-[58px]">
+        <div class="min-w-0">
+          <div class="font-extrabold text-sm sm:text-base tracking-wide leading-tight">ИХ ЗАСАГ ЧИНГИС СООСЭ ПОЛИТЕХНИК КОЛЛЕЖ</div>
+          <div class="text-[10px] sm:text-xs text-blue-300 mt-1">Мэргэжилтэй ирээдүй эндээс эхэлнэ</div>
+        </div>
+      </a>
+      <nav class="hidden xl:flex items-center gap-5 text-sm">
+        <a class="hover:text-blue-300" href="#about">Бидний тухай</a>
+        <div class="relative group" id="desktopProgramsNav">
+          <button type="button" class="inline-flex items-center gap-2 hover:text-blue-300 py-3" aria-haspopup="true" aria-expanded="false" id="desktopProgramsBtn">Мэргэжлүүд <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-hover:rotate-180"></i></button>
+          <div id="desktopProgramsDropdown" class="hidden group-hover:block group-focus-within:block absolute left-0 top-full pt-2 w-80 z-[70]">
+            <div class="rounded-2xl border border-blue-800/80 bg-[#071526] shadow-2xl shadow-black/40 p-2 max-h-[70vh] overflow-y-auto">
+              <a href="#programs" class="block rounded-lg px-3 py-2 mb-1 text-xs font-extrabold uppercase tracking-wider text-blue-300 hover:bg-blue-950">Бүх мэргэжил <i class="fa-solid fa-arrow-down ml-1"></i></a>
+                            <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=hevleliin-grafik">Хэвлэлийн график дизайнч<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=hoolnii-uilchilgee">Хоолны үйлчилгээ<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=huvtsas-design">Хувцас дизайнч<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=huvtsas-zohion-butegch">Хувцасны загвар зохион бүтээгч<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=suvilagchiin-tuslah">Сувилагчийн туслах<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=barilgiin-santehnik">Барилгын сантехник, хоолой угсралт<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=barilgiin-butets">Барилгын бүтэц угсралт<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=nyagtlan-tuslah">Нягтлан бодох бүртгэлийн туслах ажилтан<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=office-bichig-hereg">Оффис ба бичиг хэргийн ажил<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=goo-saihan">Гоо сайхны үйлчилгээ<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=ayalal-1plus1">Аялал жуулчлалын 1+1<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=huni-noots">Хүний нөөцийн менежмент<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=taiz-delgets">Тайз дэлгэцийн дизайн технологи<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=web-design">Вэб дизайн<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=oyomol-butegdehuun">Оёмол бүтээгдэхүүн үйлдвэрлэл<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=us-chin-goo-saihan">Үсчин, гоо сайхан<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=ayalal-uilchilgee">Аялал жуулчлалын үйлчилгээ<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+              <a class="block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition" href="program-details.html?program=zochid-buudal">Зочид буудал, зоогийн газрын үйлчилгээ<i class="fa-solid fa-arrow-up-right-from-square float-right mt-1 text-[10px] text-blue-400"></i></a>
+            </div>
+          </div>
+        </div>
+        <a class="hover:text-blue-300" href="#admission">Элсэлт</a>
+        <a class="hover:text-blue-300" href="#student-life">Оюутны булан</a>
+        <a class="hover:text-blue-300" href="#news">Мэдээ</a>
+        <a class="hover:text-blue-300" href="#contact">Холбоо барих</a>
+      </nav>
+      <button id="menuBtn" class="xl:hidden text-2xl p-2 focus-ring rounded-lg" aria-label="Цэс нээх" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <nav id="mobileMenu" class="hidden xl:hidden px-5 pb-5 space-y-3 bg-[#071526] border-t border-blue-900/50">
+      <a class="block py-1 hover:text-blue-300" href="#about">Бидний тухай</a>
+      <div class="border-b border-blue-900/40 pb-2">
+        <button id="mobileProgramsBtn" type="button" class="w-full flex items-center justify-between py-2 text-left hover:text-blue-300" aria-expanded="false">Мэргэжлүүд <i id="mobileProgramsIcon" class="fa-solid fa-chevron-down text-xs"></i></button>
+        <div id="mobileProgramsDropdown" class="hidden mt-1 ml-2 pl-3 border-l border-blue-700/60 space-y-1 max-h-64 overflow-y-auto">
+          <a class="block py-2 text-sm text-blue-300 hover:text-white" href="#programs">Бүх мэргэжил</a>
+                    <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=hevleliin-grafik">Хэвлэлийн график дизайнч</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=hoolnii-uilchilgee">Хоолны үйлчилгээ</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=huvtsas-design">Хувцас дизайнч</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=huvtsas-zohion-butegch">Хувцасны загвар зохион бүтээгч</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=suvilagchiin-tuslah">Сувилагчийн туслах</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=barilgiin-santehnik">Барилгын сантехник, хоолой угсралт</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=barilgiin-butets">Барилгын бүтэц угсралт</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=nyagtlan-tuslah">Нягтлан бодох бүртгэлийн туслах ажилтан</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=office-bichig-hereg">Оффис ба бичиг хэргийн ажил</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=goo-saihan">Гоо сайхны үйлчилгээ</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=ayalal-1plus1">Аялал жуулчлалын 1+1</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=huni-noots">Хүний нөөцийн менежмент</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=taiz-delgets">Тайз дэлгэцийн дизайн технологи</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=web-design">Вэб дизайн</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=oyomol-butegdehuun">Оёмол бүтээгдэхүүн үйлдвэрлэл</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=us-chin-goo-saihan">Үсчин, гоо сайхан</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=ayalal-uilchilgee">Аялал жуулчлалын үйлчилгээ</a>
+          <a class="block py-2 text-sm text-slate-300 hover:text-blue-300" href="program-details.html?program=zochid-buudal">Зочид буудал, зоогийн газрын үйлчилгээ</a>
+        </div>
+      </div>
+      <a class="block py-1 hover:text-blue-300" href="#admission">Элсэлт</a>
+      <a class="block py-1 hover:text-blue-300" href="#student-life">Оюутны булан</a>
+      <a class="block py-1 hover:text-blue-300" href="#news">Мэдээ, мэдээлэл</a>
+      <a class="block py-1 hover:text-blue-300" href="#contact">Холбоо барих</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="home" class="hero-bg border-b border-blue-900/60 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-500/10 text-blue-200 px-4 py-2 text-xs font-bold tracking-wider">
+            <i class="fa-solid fa-star"></i> ИХ ЗАСАГ ЧИНГИС СООСЭ ПОЛИТЕХНИК КОЛЛЕЖ
+          </span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mt-6">Ирээдүйгээ <span class="text-blue-400">мэргэжлээрээ</span> бүтээ.</h1>
+          <p class="text-slate-300 leading-7 mt-6 max-w-xl">Хэрэв таны мөнгө илүүдээд байвал Манай коллеж дээр суралцаарай.</p>
+          <div class="flex flex-wrap gap-3 mt-8">
+            <a href="#programs" class="blue-btn rounded-xl px-6 py-3 font-bold text-sm shadow-lg">Мэргэжлүүд үзэх <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            <a href="#admission" class="rounded-xl px-6 py-3 border border-white/20 bg-white/5 hover:bg-white/10 font-bold text-sm">Элсэлтийн мэдээлэл</a>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-10">
+            <div class="rounded-xl border border-blue-900/70 bg-[#0b2037]/70 p-4"><i class="fa-solid fa-palette text-blue-400 text-xl"></i><p class="font-semibold text-sm mt-3">Бүтээлч мэргэжил</p></div>
+            <div class="rounded-xl border border-blue-900/70 bg-[#0b2037]/70 p-4"><i class="fa-solid fa-utensils text-blue-400 text-xl"></i><p class="font-semibold text-sm mt-3">Практик ур чадвар</p></div>
+            <div class="rounded-xl border border-blue-900/70 bg-[#0b2037]/70 p-4"><i class="fa-solid fa-laptop-code text-blue-400 text-xl"></i><p class="font-semibold text-sm mt-3">Дижитал чиглэл</p></div>
+          </div>
+        </div>
+        <div class="relative scene-3d">
+          <div class="cube" style="top:-12px;right:24px" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="cube" style="bottom:36px;left:-8px;animation-duration:18s" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full"></div>
+          <div class="relative float-3d rounded-3xl overflow-hidden border border-blue-400/30 hero-photo-3d">
+            <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=85" alt="Коллежийн сургалтын байрны жишээ зураг" class="w-full h-[320px] sm:h-[440px] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/102e4e/ffffff?text=Ikh+Zasag+Polytechnic+College'">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#081a2d] via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 p-6 sm:p-8">
+              <p class="text-blue-300 font-bold text-xs tracking-widest uppercase">Суралц • Хөгж • Бүтээ</p>
+              <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">Чадвараа ирээдүй болго</h2>
+              <a href="#programs" class="inline-flex mt-4 text-sm font-semibold text-white hover:text-blue-300">Мэргэжлүүдтэй танилцах <i class="fa-solid fa-arrow-right ml-2 mt-1"></i></a>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 mt-3">Зураг нь жишээ зураг; сургуулийн өөрийн байрны зураг биш байж болно.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid lg:grid-cols-5 gap-10 items-center">
+        <div class="lg:col-span-3">
+          <p class="text-blue-400 uppercase tracking-[.2em] text-xs font-extrabold">Бидний тухай</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mt-3">Чиний дараагийн алхам эндээс</h2>
+          <p class="text-slate-300 leading-7 mt-5">Их Засаг Чингис Соосэ Политехник Коллеж нь Их Засаг их сургуулийн бүрэлдэхүүнд үйл ажиллагаа явуулдаг бөгөөд төрөл бүрийн мэргэжлийн чиглэлээр суралцагч бэлтгэдэг.</p>
+          <p class="text-slate-400 leading-7 mt-3">Хөтөлбөр, суралцах хугацаа, элсэлтийн шаардлагыг тухайн сургуулиас баталгаажуулан мэдээллээ шинэчилнэ.</p>
+          <a class="inline-flex items-center gap-2 mt-6 text-blue-300 font-bold hover:text-white" href="#programs">Мэргэжлүүдийг харах <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="lg:col-span-2 grid grid-cols-2 gap-4">
+          <div class="card-bg border border-blue-900/60 rounded-2xl p-5"><i class="fa-solid fa-book-open text-blue-400 text-2xl"></i><h3 class="font-bold mt-4">Сургалт</h3><p class="text-xs text-slate-400 mt-2 leading-5">Мэргэжлийн мэдлэг, ур чадвар эзэмших</p></div>
+          <div class="card-bg border border-blue-900/60 rounded-2xl p-5"><i class="fa-solid fa-people-group text-blue-400 text-2xl"></i><h3 class="font-bold mt-4">Хамтын ажиллагаа</h3><p class="text-xs text-slate-400 mt-2 leading-5">Багш, суралцагчдын хамтын хөгжил</p></div>
+          <div class="card-bg border border-blue-900/60 rounded-2xl p-5"><i class="fa-solid fa-lightbulb text-blue-400 text-2xl"></i><h3 class="font-bold mt-4">Бүтээлч байдал</h3><p class="text-xs text-slate-400 mt-2 leading-5">Санаагаа бодит ажил болгох</p></div>
+          <div class="card-bg border border-blue-900/60 rounded-2xl p-5"><i class="fa-solid fa-compass text-blue-400 text-2xl"></i><h3 class="font-bold mt-4">Ирээдүйн чиглэл</h3><p class="text-xs text-slate-400 mt-2 leading-5">Өөрт тохирох мэргэжлээ сонгох</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="bg-[#061526] border-y border-blue-950/70 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div><p class="text-blue-400 uppercase tracking-[.2em] text-xs font-extrabold">Сургалтын хөтөлбөр</p><h2 class="text-3xl sm:text-4xl font-extrabold mt-2">Мэргэжлүүд</h2><p class="text-slate-400 mt-3 max-w-2xl">Мэргэжил бүрийн чиглэл, давуу тал, ирээдүйд хийж болох ажлын талаар дэлгэрэнгүй үзээрэй.</p></div>
+          <span class="text-blue-300 text-sm font-bold">Өөрт тохирох чиглэлээ олоорой <i class="fa-solid fa-compass ml-1"></i></span>
+        </div>
+        <div id="programCards" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 mb-10">
+          <article class="course-card tilt-card card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-pen-nib"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Хэвлэлийн график дизайнч</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Зураг, өнгө, үсгийн хэлбэр, зохиомж ашиглан хэвлэмэл болон дижитал бүтээлийн дизайн гаргах чиглэл.</p>
+            <a href="program-details.html?program=hevleliin-grafik" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article class="course-card tilt-card card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-utensils"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Хоолны үйлчилгээ</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Хоол бэлтгэл, гал тогооны зохион байгуулалт, үйлчилгээний соёлын үндсийг судлах чиглэл.</p>
+            <a href="program-details.html?program=hoolnii-uilchilgee" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article class="course-card tilt-card card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-shirt"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Хувцас дизайнч</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Хувцасны загварын санаа гаргах, өнгө материал сонгох, загварын дүрслэл боловсруулах чиглэл.</p>
+            <a href="program-details.html?program=huvtsas-design" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article class="course-card tilt-card card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-scissors"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Хувцасны загвар зохион бүтээгч</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Хувцасны загварыг хэмжээс, эсгүүр, материалтай уялдуулан бодит бүтээгдэхүүн болгох чиглэл.</p>
+            <a href="program-details.html?program=huvtsas-zohion-butegch" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article class="course-card tilt-card card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Сувилагчийн туслах</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Эрүүл мэндийн байгууллагад үйлчлүүлэгчид туслах, асаргаа сувилгааны суурь мэдлэг эзэмших чиглэл.</p>
+            <a href="program-details.html?program=suvilagchiin-tuslah" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article class="course-card tilt-card card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-faucet-drip"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Барилгын сантехник, хоолой угсралт</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Барилгын ус хангамж, бохир ус зайлуулах шугам, сантехникийн тоноглолын угсралтын үндсийг судлах чиглэл.</p>
+            <a href="program-details.html?program=barilgiin-santehnik" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-helmet-safety"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Барилгын бүтэц угсралт</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Барилгын бүтээц, угсралтын ажлын үе шат, материал болон хөдөлмөрийн аюулгүй байдлыг судлах чиглэл.</p>
+            <a href="program-details.html?program=barilgiin-butets" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-calculator"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Нягтлан бодох бүртгэлийн туслах ажилтан</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Баримт бүрдүүлэлт, орлого зарлагын бүртгэл, тооцооны суурь ойлголтыг судлах чиглэл.</p>
+            <a href="program-details.html?program=nyagtlan-tuslah" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-file-lines"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Оффис ба бичиг хэргийн ажил</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Албан бичиг боловсруулах, мэдээлэл цэгцлэх, архивлах болон оффисын өдөр тутмын ажлыг зохион байгуулах чиглэл.</p>
+            <a href="program-details.html?program=office-bichig-hereg" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-spa"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Гоо сайхны үйлчилгээ</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Гоо сайхны үйлчилгээний суурь ойлголт, үйлчлүүлэгчтэй харилцах болон ариун цэврийн зарчмыг судлах чиглэл.</p>
+            <a href="program-details.html?program=goo-saihan" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-plane"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Аялал жуулчлалын 1+1</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Аялал жуулчлалын үйлчилгээ, зочин хүлээн авах болон соёл хоорондын харилцааны чиглэл.</p>
+            <a href="program-details.html?program=ayalal-1plus1" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-people-group"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Хүний нөөцийн менежмент</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Ажилтантай холбоотой бичиг баримт, багийн зохион байгуулалт, хүний нөөцийн ажлын суурийг судлах чиглэл.</p>
+            <a href="program-details.html?program=huni-noots" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-clapperboard"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Тайз дэлгэцийн дизайн технологи</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Тайз, дэлгэцийн орчны дүрслэл, визуал шийдэл болон бүтээлч үйлдвэрлэлийн үндсийг судлах чиглэл.</p>
+            <a href="program-details.html?program=taiz-delgets" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Вэб дизайн</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Вэб хуудасны бүтэц, харагдах байдал, хэрэглэгчийн туршлага болон дижитал контентын үндсийг судлах чиглэл.</p>
+            <a href="program-details.html?program=web-design" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-shirt"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Оёмол бүтээгдэхүүн үйлдвэрлэл</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Оёдлын бүтээгдэхүүн үйлдвэрлэх, материал сонгох, оёдлын тоног төхөөрөмж ашиглах үндсийг судлах чиглэл.</p>
+            <a href="program-details.html?program=oyomol-butegdehuun" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-scissors"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Үсчин, гоо сайхан</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Үс арчилгаа, засалт болон гоо сайхны үйлчилгээний суурь арга барилыг судлах чиглэл.</p>
+            <a href="program-details.html?program=us-chin-goo-saihan" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-map-location-dot"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Аялал жуулчлалын үйлчилгээ</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Аяллын үйлчилгээний зохион байгуулалт, зочинтой харилцах, мэдээлэл хүргэх болон аяллын бүтээгдэхүүний суурийг судлах чиглэл.</p>
+            <a href="program-details.html?program=ayalal-uilchilgee" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+          <article data-extra-program="true" class="course-card tilt-card hidden card-bg rounded-2xl border border-blue-900/60 p-6 flex flex-col">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/20 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-bell-concierge"></i></div>
+            <h3 class="text-lg font-extrabold mt-4">Зочид буудал, зоогийн газрын үйлчилгээ</h3>
+            <p class="text-sm text-slate-400 leading-6 mt-3 flex-1">Зочин угтах, үйлчилгээний стандарт, өрөө болон хоол үйлчилгээний зохион байгуулалтын суурийг судлах чиглэл.</p>
+            <a href="program-details.html?program=zochid-buudal" class="inline-flex items-center justify-between gap-3 mt-5 pt-4 border-t border-blue-900/70 text-blue-300 hover:text-white font-bold text-sm">Дэлгэрэнгүй үзэх <i class="fa-solid fa-arrow-down"></i></a>
+          </article>
+        </div>
+        <div class="flex justify-center mt-2">
+          <button id="showMorePrograms" type="button" class="inline-flex items-center gap-3 rounded-xl border border-blue-500/50 bg-blue-500/10 px-6 py-3 font-extrabold text-blue-200 hover:bg-blue-500/20 transition">
+            Бусад мэргэжил харах <i id="showMoreIcon" class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-1 rounded-3xl p-7 bg-gradient-to-br from-blue-700 to-blue-950 border border-blue-400/30">
+        <i class="fa-solid fa-compass text-3xl text-blue-100"></i><h2 class="text-2xl font-extrabold mt-5">Яагаад мэргэжил эзэмших вэ?</h2>
+        <ul class="space-y-4 text-sm text-blue-50 mt-6">
+          <li class="flex gap-3"><i class="fa-solid fa-check mt-1"></i><span>Өөрийн сонирхол, давуу талаа хөгжүүлэх</span></li>
+          <li class="flex gap-3"><i class="fa-solid fa-check mt-1"></i><span>Практик ур чадвар эзэмших</span></li>
+          <li class="flex gap-3"><i class="fa-solid fa-check mt-1"></i><span>Ирээдүйн ажлын чиглэлээ төлөвлөх</span></li>
+        </ul>
+        <a href="#admission" class="inline-block mt-8 bg-white text-blue-950 rounded-xl px-5 py-3 text-sm font-extrabold hover:bg-blue-100">Элсэлтийн мэдээлэл</a>
+      </div>
+      <div id="news" class="lg:col-span-1 card-bg rounded-3xl border border-blue-900/60 p-7 tilt-card">
+        <h2 class="text-xl font-extrabold"><i class="fa-regular fa-newspaper text-blue-400 mr-2"></i>Мэдээ, мэдээлэл</h2>
+        <p class="text-sm text-slate-400 mt-3 leading-6">Админ самбараас нэмсэн мэдээ энд шууд харагдана.</p>
+        <div id="newsList" class="space-y-3 mt-5">
+          <div class="block border border-blue-900/60 bg-[#081a2d] rounded-xl p-4">
+            <span class="text-xs text-blue-300 font-bold">АЧААЛЛАЖ БАЙНА</span>
+            <span class="block font-bold mt-2">Мэдээг уншиж байна</span>
+          </div>
+        </div>
+      </div>
+      <div id="student-life" class="lg:col-span-1 card-bg rounded-3xl border border-blue-900/60 p-7">
+        <h2 class="text-xl font-extrabold"><i class="fa-solid fa-users text-blue-400 mr-2"></i>Оюутны булан</h2>
+        <div class="space-y-3 mt-5">
+          <a href="#programs" class="flex items-center justify-between gap-3 rounded-xl bg-[#081a2d] p-4 hover:bg-blue-950"><span><span class="block text-sm font-semibold">Мэргэжлээ сонгох</span><span class="block text-xs text-slate-400 mt-1">Чиглэл, давуу талтай танилцах</span></span><i class="fa-solid fa-arrow-right text-blue-300"></i></a>
+          <a href="#admission" class="flex items-center justify-between gap-3 rounded-xl bg-[#081a2d] p-4 hover:bg-blue-950"><span><span class="block text-sm font-semibold">Элсэлтийн бүртгэл</span><span class="block text-xs text-slate-400 mt-1">Google Form-оо нээх</span></span><i class="fa-solid fa-arrow-right text-blue-300"></i></a>
+          <a href="#contact" class="flex items-center justify-between gap-3 rounded-xl bg-[#081a2d] p-4 hover:bg-blue-950"><span><span class="block text-sm font-semibold">Асуулт асуух</span><span class="block text-xs text-slate-400 mt-1">Холбоо барих мэдээлэл</span></span><i class="fa-solid fa-arrow-right text-blue-300"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="admission" class="bg-[#061526] border-y border-blue-950 py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <p class="text-blue-400 text-xs font-extrabold tracking-[.2em] uppercase">Элсэлт</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold mt-3">Элсэлтийн бүртгэл</h2>
+      <p class="text-slate-400 text-sm mt-3">Доорх товчийг дарж Google Forms дээрх бүртгэлийн хуудсыг нээнэ үү.</p>
+    </div>
+    <div class="relative overflow-hidden card-bg rounded-3xl border border-blue-500/30 p-6 sm:p-10 shadow-2xl shadow-blue-950/30 text-center">
+      <div class="absolute -top-20 -right-16 w-56 h-56 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-16 w-56 h-56 rounded-full bg-cyan-400/10 blur-3xl pointer-events-none"></div>
+      <div class="relative max-w-2xl mx-auto">
+        <div class="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-xs font-extrabold tracking-wider text-blue-200 mb-5"><i class="fa-solid fa-graduation-cap"></i> 2026–2027 ОНЫ ЭЛСЭЛТ</div>
+        <div class="w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-blue-500/30 to-cyan-400/10 border border-blue-300/30 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-blue-950/40">
+          <i class="fa-solid fa-file-pen text-3xl text-blue-200"></i>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Ирээдүйн мэргэжлээ эндээс эхлүүл</h3>
+        <p class="text-slate-300 leading-7 mt-4 max-w-xl mx-auto">Сонирхсон мэргэжлийнхээ дэлгэрэнгүй хуудсанд орж, “Энэ мэргэжлээр бүртгүүлэх” товчийг дарвал мэргэжил сонголттойгоор Google Form нээгдэнэ.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7">
+          <a id="mainAdmissionFormLink" href="https://docs.google.com/forms/d/e/1FAIpQLScWvHHLJTuTd3iXig86SxTGgvD5yW4Lf53kbvAnKvuxaLDj7g/viewform?usp=pp_url&amp;entry.1771836867=1&amp;entry.1421103343=1&amp;entry.78996502=1&amp;entry.264877103=1" target="_blank" rel="noopener noreferrer" class="blue-btn w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-xl px-7 py-4 font-extrabold text-sm shadow-lg shadow-blue-950/40 hover:-translate-y-0.5 transition-transform">
+            Бүртгэлийн форм нээх <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+          <a href="#programs" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-blue-700/70 bg-blue-950/40 px-6 py-4 font-bold text-sm text-blue-100 hover:bg-blue-900/60 transition-colors">Мэргэжил сонгох <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8 text-left">
+          <div class="rounded-xl border border-blue-900/70 bg-[#07182a]/80 p-4"><i class="fa-solid fa-list-check text-blue-300"></i><p class="font-bold text-sm mt-2">Мэргэжлээ сонго</p><p class="text-xs text-slate-400 mt-1">Өөрт тохирох чиглэлээ танилцаарай.</p></div>
+          <div class="rounded-xl border border-blue-900/70 bg-[#07182a]/80 p-4"><i class="fa-solid fa-clipboard-list text-blue-300"></i><p class="font-bold text-sm mt-2">Мэдээллээ бөглө</p><p class="text-xs text-slate-400 mt-1">Форм дээрх асуултуудад хариулна.</p></div>
+          <div class="rounded-xl border border-blue-900/70 bg-[#07182a]/80 p-4"><i class="fa-solid fa-paper-plane text-blue-300"></i><p class="font-bold text-sm mt-2">Бүртгэлээ илгээ</p><p class="text-xs text-slate-400 mt-1">Илгээхээсээ өмнө мэдээллээ шалгаарай.</p></div>
+        </div>
+        <p class="text-xs text-slate-500 mt-5"><i class="fa-solid fa-lock mr-1"></i> Google Forms тусдаа tab дээр нээгдэнэ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+
+<a href="/register"
+   class="inline-flex items-center gap-2 rounded-xl border border-blue-500 px-6 py-5 font-bold text-white hover:bg-blue-900">
+    Өөрийн сайтаар бүртгүүлэх
+</a>
+
+  <footer id="contact" class="bg-[#04101d] pt-12 pb-7">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-9 border-b border-blue-950">
+        <div class="lg:col-span-2"><div class="flex items-center gap-3"><img src="static/images/logo.png.png" alt="Коллежийн лого" class="college-logo w-11 h-11"><div class="font-extrabold">ИХ ЗАСАГ ЧИНГИС СООСЭ ПОЛИТЕХНИК КОЛЛЕЖ</div></div><p class="text-slate-400 text-sm leading-6 mt-4 max-w-md">Албан ёсны мэдээлэл, сургалтын хөтөлбөр болон элсэлтийн шаардлагыг сургуулийн эх сурвалжаас шалгана уу.</p></div>
+        <div><h3 class="font-bold mb-4">Холбоо барих</h3><p class="text-sm text-slate-400 leading-7"><i class="fa-solid fa-phone text-blue-400 mr-2"></i>+976 7711-9696</p><p class="text-sm text-slate-400 leading-7"><i class="fa-solid fa-phone text-blue-400 mr-2"></i>+976 7015-7765</p><p class="text-sm text-slate-400 leading-7"><i class="fa-solid fa-envelope text-blue-400 mr-2"></i>info@ikhzasag.edu.mn</p></div>
+        <div><h3 class="font-bold mb-4">Хаяг</h3><p class="text-sm text-slate-400 leading-6">Улаанбаатар хот, 21-р хороолол, Чингис Соосэ Политехник Коллеж</p><a class="inline-block mt-4 text-sm text-blue-300 hover:text-white" href="https://www.google.com/maps/search/?api=1&query=Chinggis+Soose+21-r+khoroolol+Ulaanbaatar" target="_blank" rel="noopener">Газрын зураг <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a></div>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 text-xs text-slate-500"><p>© 2026 Их Засаг Чингис Соосэ Политехник Коллежийн танилцуулгын сайт.</p><a href="#home" class="hover:text-blue-300">Нүүр хуудас руу буцах <i class="fa-solid fa-arrow-up ml-1"></i></a></div>
+    </div>
+  </footer>
+
+  <script>
+
+    const revealTargets = document.querySelectorAll('main section, footer');
+    revealTargets.forEach((el) => el.classList.add('reveal'));
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.08 });
+      revealTargets.forEach((el) => revealObserver.observe(el));
+    } else {
+      revealTargets.forEach((el) => el.classList.add('is-visible'));
+    }
+    const desktopProgramsBtn = document.getElementById('desktopProgramsBtn');
+    const desktopProgramsDropdown = document.getElementById('desktopProgramsDropdown');
+    const desktopProgramsNav = document.getElementById('desktopProgramsNav');
+    if (desktopProgramsBtn && desktopProgramsDropdown && desktopProgramsNav) {
+      desktopProgramsBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const opening = !desktopProgramsDropdown.classList.contains('is-open');
+        desktopProgramsDropdown.classList.toggle('is-open', opening);
+        desktopProgramsBtn.setAttribute('aria-expanded', String(opening));
+      });
+      document.addEventListener('click', (event) => {
+        if (!desktopProgramsNav.contains(event.target)) {
+          desktopProgramsDropdown.classList.remove('is-open');
+          desktopProgramsBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          desktopProgramsDropdown.classList.remove('is-open');
+          desktopProgramsBtn.setAttribute('aria-expanded', 'false');
+          desktopProgramsBtn.focus();
+        }
+      });
+      desktopProgramsDropdown.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        desktopProgramsDropdown.classList.remove('is-open');
+        desktopProgramsBtn.setAttribute('aria-expanded', 'false');
+      }));
+    }
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileProgramsBtn = document.getElementById('mobileProgramsBtn');
+    const mobileProgramsDropdown = document.getElementById('mobileProgramsDropdown');
+    const mobileProgramsIcon = document.getElementById('mobileProgramsIcon');
+    if (mobileProgramsBtn && mobileProgramsDropdown) {
+      mobileProgramsBtn.addEventListener('click', () => {
+        const opening = mobileProgramsDropdown.classList.contains('hidden');
+        mobileProgramsDropdown.classList.toggle('hidden', !opening);
+        mobileProgramsBtn.setAttribute('aria-expanded', String(opening));
+        if (mobileProgramsIcon) mobileProgramsIcon.className = opening ? 'fa-solid fa-chevron-up text-xs' : 'fa-solid fa-chevron-down text-xs';
+      });
+    }
+    menuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!isHidden));
+      menuBtn.innerHTML = isHidden ? '<i class="fa-solid fa-bars"></i>' : '<i class="fa-solid fa-xmark"></i>';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }));
+  </script>
+
+<script>
+(function(){
+  const btn=document.getElementById('showMorePrograms');
+  const extras=[...document.querySelectorAll('[data-extra-program="true"]')];
+  if(!btn || !extras.length) return;
+  btn.addEventListener('click',function(){
+    const opening=extras[0].classList.contains('hidden');
+    extras.forEach(card=>card.classList.toggle('hidden',!opening));
+    btn.innerHTML=opening?'Цөөн мэргэжил харах <i class="fa-solid fa-chevron-up"></i>':'Бусад мэргэжил харах <i class="fa-solid fa-chevron-down"></i>';
+  });
+})();
+</script>
+<script>
+// SQLite-аас зөвхөн desktop/mobile-ийн “Мэргэжлүүд” цэсийг дүүргэнэ.
+(async function(){try{
+ const r=await fetch('/api/programs'); if(!r.ok)return; const programs=await r.json();
+ const desktop=document.getElementById('desktopProgramsDropdown');
+ const mobile=document.getElementById('mobileProgramsDropdown');
+ function populate(root,isMobile){if(!root)return;const wrap=isMobile?root:root.querySelector('.rounded-2xl');if(!wrap)return;
+ const all=wrap.querySelector('a[href="#programs"]');wrap.replaceChildren();if(all)wrap.appendChild(all);
+ programs.forEach(p=>{const a=document.createElement('a');a.href='program-details.html?program='+encodeURIComponent(p.slug);a.textContent=p.name;
+ a.className=isMobile?'block py-2 text-sm text-slate-300 hover:text-blue-300':'block rounded-lg px-3 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-blue-900/70 transition';wrap.appendChild(a);});}
+ populate(desktop,false);populate(mobile,true);
+ }catch(e){console.warn('SQLite мэргэжлийн цэс ачаалсангүй; HTML-ийн үндсэн холбоосууд хэвээр.',e);}})();
+</script>
+<script>
+(async function(){
+  const list = document.getElementById('newsList');
+  if (!list) return;
+  function card(title, body, date, imagePath) {
+    const wrap = document.createElement('article');
+    wrap.className = 'block border border-blue-900/60 bg-[#081a2d] rounded-xl p-4';
+    const kicker = document.createElement('span');
+    kicker.className = 'text-xs text-blue-300 font-bold';
+    kicker.textContent = date || 'МЭДЭЭ';
+    const heading = document.createElement('span');
+    heading.className = 'block font-bold mt-2';
+    heading.textContent = title;
+    const text = document.createElement('span');
+    text.className = 'block text-sm text-slate-400 mt-2 leading-6 whitespace-pre-wrap';
+    text.textContent = body;
+    if (imagePath) {
+      const img = document.createElement('img');
+      img.src = imagePath;
+      img.alt = title;
+      img.loading = 'lazy';
+      img.className = 'w-full max-h-72 object-cover rounded-lg mb-3';
+      wrap.append(img);
+    }
+    wrap.append(kicker, heading, text);
+    return wrap;
+  }
+  try {
+    const res = await fetch('/api/news');
+    if (!res.ok) throw new Error('news');
+    const items = await res.json();
+    list.replaceChildren();
+    if (!items.length) {
+      list.appendChild(card('Мэдээ байхгүй', 'Админ самбараас шинэ мэдээ нэмнэ үү.', 'МЭДЭЭ'));
+      return;
+    }
+    items.forEach((item) => {
+      list.appendChild(card(item.title, item.body, item.created_at, item.image_path));
+    });
+  } catch (e) {
+    list.replaceChildren();
+    list.appendChild(card('Мэдээ ачаалсангүй', 'Сайтыг Flask серверээр нээнэ үү: http://127.0.0.1:5000', 'АНХААРУУЛГА'));
+  }
+})();
+</script>
+</body>
+</html>

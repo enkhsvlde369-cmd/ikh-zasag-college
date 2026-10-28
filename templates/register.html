@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урьдчилсан бүртгэл | Чингис Соосэ Коллеж</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 16px;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #09192c, #102e4e);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 32px;
+            background: #132d4e;
+            border: 1px solid #29476a;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px #0004;
+        }
+
+        .brand-logo {
+            display: block;
+            width: 86px;
+            height: 86px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 24px #0006;
+            border: 2px solid #d4af37;
+            animation: logoTilt 6s ease-in-out infinite;
+        }
+
+        @keyframes logoTilt {
+            0%, 100% { transform: rotateY(-16deg); }
+            50% { transform: rotateY(16deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .brand-logo { animation: none; }
+        }
+
+        h1 {
+            font-size: 25px;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #b8c9df;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border-radius: 9px;
+            border: 1px solid #45617f;
+            background: #09192c;
+            color: white;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #4364f7;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            background: #174e43;
+            overflow-wrap: anywhere;
+        }
+
+        .error {
+            background: #6b2830;
+        }
+
+        .back {
+            display: block;
+            margin-top: 22px;
+            color: #b8d5ff;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <img src="/static/images/logo.png.png" alt="Их Засаг коллежийн лого" class="brand-logo">
+        <h1>Урьдчилсан бүртгэл</h1>
+
+        <p class="subtitle">
+            Их Засаг Чингис Соосэ Политехник Коллеж<br>
+            Мэдээллээ бөглөн бүртгүүлнэ үү.
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="message {% if category == 'error' %}error{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('register') }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <label for="full_name">Овог, нэр</label>
+            <input
+                type="text"
+                id="full_name"
+                name="full_name"
+                placeholder="Овог, нэрээ бичнэ үү"
+                maxlength="120"
+                required
+            >
+
+            <label for="phone">Утасны дугаар</label>
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Жишээ: 99112233"
+                maxlength="30"
+                required
+            >
+
+            <label for="program_name">Сонгох мэргэжил</label>
+            <select id="program_name" name="program_name" required>
+                <option value="">-- Мэргэжлээ сонгоно уу --</option>
+
+                {% for p in programs %}
+                    <option value="{{ p['name'] }}">{{ p['name'] }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Бүртгүүлэх</button>
+        </form>
+
+       <a class="back" href="/">
+    ← Нүүр хуудас руу буцах
+</a>
+    </main>
+</body>
+</html>
